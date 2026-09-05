@@ -100,7 +100,7 @@ Also make the calculated values available through the provided `stability.pitch.
 Before asking ChatGPT for code, complete each prediction in your own words.
 
 1. If `Cm_alpha < 0` and the angle-of-attack disturbance is positive, `delta_Cm` should be negative because Cm_alpha is negative and it creates a restoring force.
-2. If `Cm_alpha > 0` and the angle-of-attack disturbance is positive, the response should be positive because Cm_alpha is positive and it creates a destabilitizing force.
+2. If `Cm_alpha > 0` and the angle-of-attack disturbance is positive, the response should be positive because Cm_alpha is positive and it creates a destabilitizing movement.
 3. If `Cm_alpha = 0`, changing angle of attack should result in no change.
 4. If `Cm0` is fixed and the magnitude of a nonzero `Cm_alpha` increases, the trim angle magnitude should decrease because alpha_trim will be reduced.
 5. Doubling `disturbanceAlphaDeg` while holding `Cm_alpha` fixed should also double Delta_cm.
@@ -118,21 +118,21 @@ delta_alpha = +2.00 deg
 
 Angle conversion:
 alpha_rad = 2.86 * pi / 180 = 0.05
-delta_alpha_rad = 2 * pi / 180 = 0.35
+delta_alpha_rad = 2 * pi / 180 = 0.035
 
 Current pitching-moment coefficient:
-Cm(alpha) = 0.04 + -0.8 * 0.05 = 0.36
+Cm(alpha) = 0.04 + -0.8 * 0.05 = 0
 
 Trim angle:
 alpha_trim_rad = -0.04/-0.8 = 0.05
 alpha_trim_deg = 0.05 * 180 / pi = 2.86
 
 Disturbance response:
-delta_Cm = -0.8 * 0.35 = -0.28
+delta_Cm = -0.8 * 0.035 = -0.028
 
 Expected classifications:
 selected condition = not trimmed
-disturbance tendency = neutral
+disturbance tendency = restoring
 ```
 
 ## 9. Verification Cases — STUDENT COMPLETES
@@ -144,24 +144,30 @@ Define all three cases before implementation. Include exact inputs, expected out
 Use your Section 8 reference calculation.
 
 alpha_rad = 0.05
-delta_alpha_rad = 0.35
-Cm(alpha) = 0.36
+delta_alpha_rad = 0.035
+Cm(alpha) = 0
 alpha_trim_rad = 0.05
 alpha_trim_deg = 2.86
-delta_Cm = -0.28
+delta_Cm = -0.028
 
 ### 9.2 Behavioral case
 
 Change one input and state the exact trend or sign that must result.
 
-selected condition = trimmed
-disturbance tendency = restoring
+### 9.2 Behavioral case
+
+Keep Cm0, angleOfAttackDeg, and disturbanceAlphaDeg fixed. Change cmAlphaPerRad from -0.8 1/rad to +0.8 1/rad.
+
+With the change, delta_Cm should be positive and the disturbance tendency should be destabilizing.
+
 
 ### 9.3 Boundary or sanity case
 
 Use an informative boundary such as zero slope, zero disturbance, or the trim condition. State the exact behavior expected and why division by zero or a false physical claim must not occur.
 
-If a value (like CM_alpha) is 0, the code must check which value is 0 so it doesnt accidentally divide by 0 and crash or result in an impossible number. 
+Set cm0 = 0.04, cm_alpha = 0 1/rad, alpha = 2.86 deg, and delta_alpha = +2.00 deg.
+
+Cm(alpha) should remain 0.04, delta_Cm should be 0, and the trim angle an error because there is no trim angle when cm_alpha is not available. The calculation must not divide by zero or produce an invalid or infinite trim angle.
 
 ## 10. Feature Requirements
 
