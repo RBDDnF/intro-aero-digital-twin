@@ -131,7 +131,7 @@ Disturbance response:
 delta_Cm = -0.8 * 0.035 = -0.028
 
 Expected classifications:
-selected condition = not trimmed
+selected condition = trimmed
 disturbance tendency = restoring
 ```
 
@@ -167,7 +167,7 @@ Use an informative boundary such as zero slope, zero disturbance, or the trim co
 
 Set cm0 = 0.04, cm_alpha = 0 1/rad, alpha = 2.86 deg, and delta_alpha = +2.00 deg.
 
-Cm(alpha) should remain 0.04, delta_Cm should be 0, and the trim angle an error because there is no trim angle when cm_alpha is not available. The calculation must not divide by zero or produce an invalid or infinite trim angle.
+Cm(alpha) should remain 0.04, delta_Cm should be 0, and the trim angle should be reported as not available because there is no trim angle when cm_alpha is not available. The calculation must not divide by zero or produce an invalid or infinite trim angle.
 
 ## 10. Feature Requirements
 
