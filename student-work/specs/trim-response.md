@@ -1,6 +1,6 @@
 # Stage 4 Starter Specification: Live Cm–Alpha Relationship and Trim
 
-Student name: `Nandhawat Chanaudompassorn`
+Student name: Nandhawat Chanaudompassorn
 
 Complete only the boxes marked **STUDENT COMPLETES**. The instructor-provided engineering scope and the implementation contract must not be edited. When the specification is complete and approved, attach this one file to ChatGPT.
 
@@ -103,7 +103,7 @@ Before asking ChatGPT for code, complete each prediction in your own words.
 2. If `Cm_alpha > 0` and the angle-of-attack disturbance is positive, the response should be positive because Cm_alpha is positive and it creates a destabilitizing force.
 3. If `Cm_alpha = 0`, changing angle of attack should result in no change.
 4. If `Cm0` is fixed and the magnitude of a nonzero `Cm_alpha` increases, the trim angle magnitude should decrease because alpha_trim will be reduced.
-5. Doubling `disturbanceAlphaDeg` while holding `Cm_alpha` fixed should also double .
+5. Doubling `disturbanceAlphaDeg` while holding `Cm_alpha` fixed should also double Delta_cm.
 
 ## 8. Reference Calculation — STUDENT COMPLETES
 
@@ -117,22 +117,22 @@ alpha = 2.86 deg
 delta_alpha = +2.00 deg
 
 Angle conversion:
-alpha_rad = [SHOW WORK]
-delta_alpha_rad = [SHOW WORK]
+alpha_rad = 2.86 * pi / 180 = 0.05
+delta_alpha_rad = 2 * pi / 180 = 0.35
 
 Current pitching-moment coefficient:
-Cm(alpha) = [SHOW WORK]
+Cm(alpha) = 0.04 + -0.8 * 0.05 = 0.36
 
 Trim angle:
-alpha_trim_rad = [SHOW WORK]
-alpha_trim_deg = [SHOW WORK]
+alpha_trim_rad = -0.04/-0.8 = 0.05
+alpha_trim_deg = 0.05 * 180 / pi = 2.86
 
 Disturbance response:
-delta_Cm = [SHOW WORK]
+delta_Cm = -0.8 * 0.35 = -0.28
 
 Expected classifications:
-selected condition = [trimmed / not trimmed]
-disturbance tendency = [restoring / neutral / destabilizing]
+selected condition = not trimmed
+disturbance tendency = neutral
 ```
 
 ## 9. Verification Cases — STUDENT COMPLETES
@@ -143,25 +143,25 @@ Define all three cases before implementation. Include exact inputs, expected out
 
 Use your Section 8 reference calculation.
 
-```text
-[COMPLETE]
-```
+alpha_rad = 0.05
+delta_alpha_rad = 0.35
+Cm(alpha) = 0.36
+alpha_trim_rad = 0.05
+alpha_trim_deg = 2.86
+delta_Cm = -0.28
 
 ### 9.2 Behavioral case
 
 Change one input and state the exact trend or sign that must result.
 
-```text
-[COMPLETE]
-```
+selected condition = trimmed
+disturbance tendency = restoring
 
 ### 9.3 Boundary or sanity case
 
 Use an informative boundary such as zero slope, zero disturbance, or the trim condition. State the exact behavior expected and why division by zero or a false physical claim must not occur.
 
-```text
-[COMPLETE]
-```
+If a value (like CM_alpha) is 0, the code must check which value is 0 so it doesnt accidentally divide by 0 and crash or result in an impossible number. 
 
 ## 10. Feature Requirements
 
@@ -195,9 +195,7 @@ Do not modify any existing file.
 
 In one or two sentences, state what decision the completed feature will support and what it cannot establish.
 
-```text
-[COMPLETE]
-```
+This feature allows engineers to check the aerodynamics of the craft and whether it is stable during normal flgith or not at certain pitches. It cannot tell you if thye aircraft stays stable at extreme rolling angles.
 
 ---
 
