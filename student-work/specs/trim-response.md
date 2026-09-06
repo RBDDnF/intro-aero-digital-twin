@@ -148,7 +148,7 @@ delta_alpha_rad = 0.0349066 rad
 Cm(alpha) = 0.00006687
 alpha_trim_rad = 0.05 rad
 alpha_trim_deg = 2.86479
-delta_Cm = --0.0279253
+delta_Cm = -0.0279253
 
 ### 9.2 Behavioral case
 
@@ -244,7 +244,7 @@ After approval, provide the complete contents of exactly the three new files in 
 - The application uses Vite, React, plain JavaScript, and Vitest.
 - Put all engineering equations in `src/student/physics/trim-response.js` as exported pure functions.
 - The physics file has no React imports, browser dependencies, or mutable shared state.
-- Use SI units internally. Convert degree inputs to radians where required and reject obviously invalid numeric inputs.
+- Use SI units internally. Convert degree inputs to radians where required and reject obviously invalid numeric inputs (Numeric input validation: All four canonical aircraft inputs must be finite numeric values. Missing, non-numeric, NaN, and positive or negative infinity values are rejected. No additional numeric range limits are imposed; aerodynamic validity remains governed by the assumptions and validity limits in Sections 5 and 6).
 - Concisely comment input units, output units, sign conventions, and important assumptions.
 - Do not add dependencies or modify existing files.
 - The application automatically discovers `src/student/features/*.feature.js`.
