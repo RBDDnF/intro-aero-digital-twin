@@ -117,21 +117,21 @@ alpha = 2.86 deg
 delta_alpha = +2.00 deg
 
 Angle conversion:
-alpha_rad = 2.86 * pi / 180 = 0.05
-delta_alpha_rad = 2 * pi / 180 = 0.035
+alpha_rad = 2.86 * pi / 180 = 0.0499164
+delta_alpha_rad = 2 * pi / 180 = 0.0349066 rad
 
 Current pitching-moment coefficient:
-Cm(alpha) = 0.04 + -0.8 * 0.05 = 0
+Cm(alpha) = 0.04 + -0.8 * 0.0499164 = 0.00006687
 
 Trim angle:
-alpha_trim_rad = -0.04/-0.8 = 0.05
-alpha_trim_deg = 0.05 * 180 / pi = 2.86
+alpha_trim_rad = -0.04/-0.8 = 0.05 rad
+alpha_trim_deg = 0.0499164 * 180 / pi = 2.86479
 
 Disturbance response:
-delta_Cm = -0.8 * 0.035 = -0.028
+delta_Cm = -0.8 * 0.0349066 = -0.0279253
 
 Expected classifications:
-selected condition = trimmed
+selected condition = not trimmed
 disturbance tendency = restoring
 ```
 
@@ -143,18 +143,16 @@ Define all three cases before implementation. Include exact inputs, expected out
 
 Use your Section 8 reference calculation.
 
-alpha_rad = 0.05
-delta_alpha_rad = 0.035
-Cm(alpha) = 0
-alpha_trim_rad = 0.05
-alpha_trim_deg = 2.86
-delta_Cm = -0.028
+alpha_rad = 0.0499164
+delta_alpha_rad = 0.0349066 rad
+Cm(alpha) = 0.00006687
+alpha_trim_rad = 0.05 rad
+alpha_trim_deg = 2.86479
+delta_Cm = --0.0279253
 
 ### 9.2 Behavioral case
 
 Change one input and state the exact trend or sign that must result.
-
-### 9.2 Behavioral case
 
 Keep Cm0, angleOfAttackDeg, and disturbanceAlphaDeg fixed. Change cmAlphaPerRad from -0.8 1/rad to +0.8 1/rad.
 
@@ -167,7 +165,7 @@ Use an informative boundary such as zero slope, zero disturbance, or the trim co
 
 Set cm0 = 0.04, cm_alpha = 0 1/rad, alpha = 2.86 deg, and delta_alpha = +2.00 deg.
 
-Cm(alpha) should remain 0.04, delta_Cm should be 0, and the trim angle should be reported as not available because there is no trim angle when Cm_alpha = 0, no unique trim angle exists.. The calculation must not divide by zero or produce an invalid or infinite trim angle.
+Cm(alpha) should remain 0.04, delta_Cm should be 0, and the trim angle should be reported as not available because there is no trim angle when Cm_alpha = 0, no unique trim angle exists. The calculation must not divide by zero or produce an invalid or infinite trim angle.
 
 ## 10. Feature Requirements
 
