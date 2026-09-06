@@ -99,8 +99,8 @@ Also make the calculated values available through the provided `stability.pitch.
 
 Before asking ChatGPT for code, complete each prediction in your own words.
 
-1. If `Cm_alpha < 0` and the angle-of-attack disturbance is positive, `delta_Cm` should be negative because Cm_alpha is negative and it creates a restoring force.
-2. If `Cm_alpha > 0` and the angle-of-attack disturbance is positive, the response should be positive because Cm_alpha is positive and it creates a destabilitizing movement.
+1. If `Cm_alpha < 0` and the angle-of-attack disturbance is positive, `delta_Cm` should be negative because Cm_alpha is negative and it creates a restoring moment tendency.
+2. If `Cm_alpha > 0` and the angle-of-attack disturbance is positive, the response should be positive because Cm_alpha is positive and it creates a destabilizing moment tendency.
 3. If `Cm_alpha = 0`, changing angle of attack should result in no change.
 4. If `Cm0` is fixed and the magnitude of a nonzero `Cm_alpha` increases, the trim angle magnitude should decrease because alpha_trim will be reduced.
 5. Doubling `disturbanceAlphaDeg` while holding `Cm_alpha` fixed should also double Delta_cm.
@@ -167,7 +167,7 @@ Use an informative boundary such as zero slope, zero disturbance, or the trim co
 
 Set cm0 = 0.04, cm_alpha = 0 1/rad, alpha = 2.86 deg, and delta_alpha = +2.00 deg.
 
-Cm(alpha) should remain 0.04, delta_Cm should be 0, and the trim angle should be reported as not available because there is no trim angle when cm_alpha is not available. The calculation must not divide by zero or produce an invalid or infinite trim angle.
+Cm(alpha) should remain 0.04, delta_Cm should be 0, and the trim angle should be reported as not available because there is no trim angle when Cm_alpha = 0, no unique trim angle exists.. The calculation must not divide by zero or produce an invalid or infinite trim angle.
 
 ## 10. Feature Requirements
 
@@ -201,7 +201,7 @@ Do not modify any existing file.
 
 In one or two sentences, state what decision the completed feature will support and what it cannot establish.
 
-This feature allows engineers to check the aerodynamics of the craft and whether it is stable during normal flgith or not at certain pitches. It cannot tell you if thye aircraft stays stable at extreme rolling angles.
+This feature allows engineers to check the aerodynamics of the craft and whether it is stable during normal flgith or not at certain pitches. It cannot establish overall aircraft stability, safety, flightworthiness, or behavior outside the linear model's validity limits.
 
 ---
 
